@@ -18,7 +18,7 @@ public struct WelcomeView: View {
     
     public var action: (() -> Void)?
     
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: 28) {
             VStack(alignment: .leading) {
                 Text(isFirstLaunch ? "Welcome to" : "What's New")
