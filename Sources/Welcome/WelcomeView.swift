@@ -75,6 +75,15 @@ public struct WelcomeView: View {
         .frame(width: 300)
         .padding(.vertical, 64)
     }
+    
+    public init(isShown: Binding<Bool>, isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature, action: (() -> Void)?) {
+        self._isShown = isShown
+        self._isFirstLaunch = State(initialValue: isFirstLaunch)
+        self._appName = State(initialValue: appName)
+        self._feature1 = State(initialValue: feature1)
+        self._feature2 = State(initialValue: feature2)
+        self._feature3 = State(initialValue: feature3)
+    }
 }
 
 struct WelcomeView_Previews: PreviewProvider {
