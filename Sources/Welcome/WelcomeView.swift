@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+public struct WelcomeView: View {
     
-    @Binding var isShown: Bool
-    @State var isFirstLaunch: Bool
-    @State var appName: String
-    @State var feature1: WelcomeFeature
-    @State var feature2: WelcomeFeature
-    @State var feature3: WelcomeFeature
+    @Binding public var isShown: Bool
+    @State public var isFirstLaunch: Bool
+    @State public var appName: String
+    @State public var feature1: WelcomeFeature
+    @State public var feature2: WelcomeFeature
+    @State public var feature3: WelcomeFeature
     
-    var action: (() -> Void)?
+    public var action: (() -> Void)?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 28) {

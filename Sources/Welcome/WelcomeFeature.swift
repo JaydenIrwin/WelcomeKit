@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct WelcomeFeature {
-    var image: Image
-    var title: String
-    var body: String
+public struct WelcomeFeature {
+    public var image: Image
+    public var title: String
+    public var body: String
 }
