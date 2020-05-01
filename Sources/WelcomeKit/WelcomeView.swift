@@ -9,9 +9,12 @@ import SwiftUI
 
 public struct WelcomeView: View {
     
+    static let continueNotification = Notification.Name("WelcomeKit.continue")
+    
     @Binding public var isShown: Bool
     @State public var isFirstLaunch: Bool
     @State public var appName: String
+    @State public var appDescription: String
     @State public var feature1: WelcomeFeature
     @State public var feature2: WelcomeFeature
     @State public var feature3: WelcomeFeature
@@ -26,9 +29,13 @@ public struct WelcomeView: View {
                     .foregroundColor(.accentColor)
             }
             .font(Font.system(size: 40, weight: .heavy, design: .default))
+            if appDescription != nil {
+                Text(appDescription)
+            }
             HStack(spacing: 12) {
                 feature1.image
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 54, height: 54)
                     .foregroundColor(.accentColor)
                 VStack(alignment: .leading, spacing: 4) {
@@ -40,6 +47,7 @@ public struct WelcomeView: View {
             HStack(spacing: 12) {
                 feature2.image
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 54, height: 54)
                     .foregroundColor(.accentColor)
                 VStack(alignment: .leading, spacing: 4) {
@@ -51,6 +59,7 @@ public struct WelcomeView: View {
             HStack(spacing: 12) {
                 feature3.image
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 54, height: 54)
                     .foregroundColor(.accentColor)
                 VStack(alignment: .leading, spacing: 4) {
@@ -63,6 +72,7 @@ public struct WelcomeView: View {
             Button(action: {
                 self.action?()
                 self.isShown.toggle()
+                NotificationCenter.default.post(name: WelcomeView.continueNotification, object: nil)
             }, label: {
                 Text("Continue")
                     .font(.headline)
