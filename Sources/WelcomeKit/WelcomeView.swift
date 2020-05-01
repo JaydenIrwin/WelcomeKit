@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct WelcomeView: View {
     
-    static let continueNotification = Notification.Name("WelcomeKit.continue")
+    public static let continueNotification = Notification.Name("WelcomeKit.continue")
     
     @Binding public var isShown: Bool
     @State public var isFirstLaunch: Bool
@@ -94,6 +94,7 @@ public struct WelcomeView: View {
         self._feature1 = State(initialValue: feature1)
         self._feature2 = State(initialValue: feature2)
         self._feature3 = State(initialValue: feature3)
+        self.action = action
     }
 }
 
