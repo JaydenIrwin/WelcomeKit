@@ -9,6 +9,8 @@ import SwiftUI
 
 public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptivePresentationControllerDelegate {
     
+    public var action: (() -> Void)?
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         presentationController?.delegate = self
@@ -22,6 +24,7 @@ public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptive
     #endif
     
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        action?()
         NotificationCenter.default.post(name: WelcomeView.continueNotification, object: nil)
     }
     
