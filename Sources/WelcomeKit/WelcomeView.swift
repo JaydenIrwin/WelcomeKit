@@ -22,7 +22,7 @@ public struct WelcomeView: View {
     public var action: (() -> Void)?
     
     public var body: some View {
-        VStack(alignment: .leading, spacing: 28) {
+        VStack(alignment: .leading, spacing: 24) { //28
             VStack(alignment: .leading) {
                 Text(isFirstLaunch ? "Welcome to" : "What's New")
                 Text(appName)
@@ -87,7 +87,7 @@ public struct WelcomeView: View {
             })
         }
         .frame(width: 300)
-        .padding(.vertical, 64)
+        .padding(.vertical, 60) //64
     }
     
     public init(isShown: Binding<Bool>, isFirstLaunch: Bool, appName: String, appDescription: String?, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature, action: (() -> Void)?) {
