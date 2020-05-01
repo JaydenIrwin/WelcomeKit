@@ -18,8 +18,6 @@ public struct WelcomeView: View {
     @State public var feature2: WelcomeFeature
     @State public var feature3: WelcomeFeature
     
-    public var action: (() -> Void)?
-    
     public var body: some View {
         VStack(alignment: .leading, spacing: 28) {
             VStack(alignment: .leading) {
@@ -69,7 +67,6 @@ public struct WelcomeView: View {
             }
             Spacer()
             Button(action: {
-                self.action?()
                 self.isShown.toggle()
                 NotificationCenter.default.post(name: WelcomeView.continueNotification, object: nil)
             }, label: {
@@ -85,14 +82,13 @@ public struct WelcomeView: View {
         .padding(.vertical, 64)
     }
     
-    public init(isShown: Binding<Bool>, isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature, action: (() -> Void)?) {
+    public init(isShown: Binding<Bool>, isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature) {
         self._isShown = isShown
         self._isFirstLaunch = State(initialValue: isFirstLaunch)
         self._appName = State(initialValue: appName)
         self._feature1 = State(initialValue: feature1)
         self._feature2 = State(initialValue: feature2)
         self._feature3 = State(initialValue: feature3)
-        self.action = action
     }
 }
 
@@ -101,6 +97,6 @@ struct WelcomeView_Previews: PreviewProvider {
         let f1 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
         let f2 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
         let f3 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
-        return WelcomeView(isShown: .constant(true), isFirstLaunch: false, appName: "My App", feature1: f1, feature2: f2, feature3: f3, action: nil)
+        return WelcomeView(isShown: .constant(true), isFirstLaunch: false, appName: "My App", feature1: f1, feature2: f2, feature3: f3)
     }
 }
