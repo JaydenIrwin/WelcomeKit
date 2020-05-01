@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class WelcomeViewController: UIHostingController, UIAdaptivePresentationControllerDelegate {
+class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptivePresentationControllerDelegate {
     
     var action: (() -> Void)?
     
