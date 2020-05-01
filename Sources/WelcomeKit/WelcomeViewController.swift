@@ -12,7 +12,7 @@ public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptive
     public override func viewDidLoad() {
         super.viewDidLoad()
         isModalInPresentation = true
-//        presentationController?.delegate = self
+        presentationController?.delegate = self
     }
     
     #if targetEnvironment(macCatalyst)
@@ -22,9 +22,9 @@ public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptive
     }
     #endif
     
-//    public func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
-//        return false
-//    }
+    public func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return false
+    }
 //
 //    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
 //        NotificationCenter.default.post(name: WelcomeView.continueNotification, object: nil)
