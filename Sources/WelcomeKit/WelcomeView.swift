@@ -31,6 +31,7 @@ public struct WelcomeView: View {
             .font(Font.system(size: 40, weight: .heavy, design: .default))
             if appDescription != nil {
                 Text(appDescription!)
+                    .lineLimit(nil)
             }
             HStack(spacing: 12) {
                 feature1.image
@@ -42,6 +43,7 @@ public struct WelcomeView: View {
                     Text(feature1.title)
                         .font(.headline)
                     Text(feature1.body)
+                        .lineLimit(nil)
                 }
             }
             HStack(spacing: 12) {
@@ -54,6 +56,7 @@ public struct WelcomeView: View {
                     Text(feature2.title)
                         .font(.headline)
                     Text(feature2.body)
+                        .lineLimit(nil)
                 }
             }
             HStack(spacing: 12) {
@@ -66,6 +69,7 @@ public struct WelcomeView: View {
                     Text(feature3.title)
                         .font(.headline)
                     Text(feature3.body)
+                        .lineLimit(nil)
                 }
             }
             Spacer()
