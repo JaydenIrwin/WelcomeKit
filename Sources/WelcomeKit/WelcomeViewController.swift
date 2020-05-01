@@ -14,9 +14,7 @@ public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptive
     public override func viewDidLoad() {
         super.viewDidLoad()
         presentationController?.delegate = self
-        NotificationCenter.default.addObserver(forName: WelcomeView.continueNotification, object: nil, queue: nil) { (_) in
-            self.dismiss(animated: true, completion: nil)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(continueTapped), name: WelcomeView.continueNotification, object: nil)
     }
     
     #if targetEnvironment(macCatalyst)
@@ -25,6 +23,10 @@ public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptive
         view.window?.windowScene?.titlebar?.toolbar = nil
     }
     #endif
+    
+    @objc func continueTapped(notification: Notification) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         action?()
