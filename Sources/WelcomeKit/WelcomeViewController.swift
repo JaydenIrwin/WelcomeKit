@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptivePresentationControllerDelegate {
+public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptivePresentationControllerDelegate {
     
-    var action: (() -> Void)?
+    public var action: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
