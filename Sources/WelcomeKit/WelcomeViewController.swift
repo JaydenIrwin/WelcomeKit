@@ -11,7 +11,7 @@ public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptive
     
     public var action: (() -> Void)?
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         presentationController?.delegate = self
         NotificationCenter.default.addObserver(forName: WelcomeView.continueNotification, object: nil, queue: nil) { (_) in
@@ -20,13 +20,13 @@ public class WelcomeViewController: UIHostingController<WelcomeView>, UIAdaptive
     }
     
     #if targetEnvironment(macCatalyst)
-    override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         view.window?.windowScene?.titlebar?.toolbar = nil
     }
     #endif
     
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         action?()
     }
     
