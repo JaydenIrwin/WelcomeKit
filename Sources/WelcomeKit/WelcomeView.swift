@@ -44,7 +44,7 @@ public struct WelcomeView: View {
                             .font(.headline)
                         Text(feature1.body)
                             .lineLimit(nil)
-                            .fixedSize()
+                            .fixedSize(horizontal: false, vertical: true) // Fix for SwiftUI 1.0
                     }
                 }
                 HStack(spacing: 12) {
@@ -58,7 +58,7 @@ public struct WelcomeView: View {
                             .font(.headline)
                         Text(feature2.body)
                             .lineLimit(nil)
-                            .fixedSize()
+                            .fixedSize(horizontal: false, vertical: true) // Fix for SwiftUI 1.0
                     }
                 }
                 HStack(spacing: 12) {
@@ -72,10 +72,11 @@ public struct WelcomeView: View {
                             .font(.headline)
                         Text(feature3.body)
                             .lineLimit(nil)
-                            .fixedSize()
+                            .fixedSize(horizontal: false, vertical: true) // Fix for SwiftUI 1.0
                     }
                 }
             }
+            .frame(width: isMacOS ? 500 : 300)
             Spacer()
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
