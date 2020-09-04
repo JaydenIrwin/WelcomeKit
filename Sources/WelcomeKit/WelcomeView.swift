@@ -28,6 +28,7 @@ public struct WelcomeView: View {
         VStack(spacing: 28) {
             Text(isFirstLaunch ? "Welcome to \(appName)" : "What's New in \(appName)")
                 .font(Font.system(size: isMacOS ? 46 : 36, weight: isMacOS ? .thin : .bold, design: .default))
+                .multilineTextAlignment(.center)
             #if os(macOS)
             Divider()
             #endif
@@ -43,6 +44,7 @@ public struct WelcomeView: View {
                             .font(.headline)
                         Text(feature1.body)
                             .lineLimit(nil)
+                            .fixedSize()
                     }
                 }
                 HStack(spacing: 12) {
@@ -56,6 +58,7 @@ public struct WelcomeView: View {
                             .font(.headline)
                         Text(feature2.body)
                             .lineLimit(nil)
+                            .fixedSize()
                     }
                 }
                 HStack(spacing: 12) {
@@ -69,6 +72,7 @@ public struct WelcomeView: View {
                             .font(.headline)
                         Text(feature3.body)
                             .lineLimit(nil)
+                            .fixedSize()
                     }
                 }
             }
