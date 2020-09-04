@@ -26,17 +26,10 @@ public struct WelcomeView: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 28) {
-            #if os(macOS)
             Text(isFirstLaunch ? "Welcome to \(appName)" : "What's New in \(appName)")
-                .font(Font.system(size: 40, weight: .thin, design: .default))
+                .font(Font.system(size: isMacOS ? 46 : 36, weight: isMacOS ? .thin : .heavy, design: .default))
+            #if os(macOS)
             Divider()
-            #else
-            VStack(alignment: .leading) {
-                Text(isFirstLaunch ? "Welcome to" : "What's New")
-                Text(appName)
-                    .foregroundColor(.accentColor)
-            }
-            .font(Font.system(size: 40, weight: .heavy, design: .default))
             #endif
             HStack(spacing: 12) {
                 feature1.image
@@ -96,7 +89,7 @@ public struct WelcomeView: View {
     
     public init(isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature) {
         self.isFirstLaunch = isFirstLaunch
-        self.appName = appName
+        self.appName = appName.replacingOccurrences(of: " ", with: "\u{00a0}") // Use non-breaking spaces
         self.feature1 = feature1
         self.feature2 = feature2
         self.feature3 = feature3
