@@ -11,7 +11,8 @@ public struct WelcomeView: View {
     
     public static let continueNotification = Notification.Name("WelcomeKit.continue")
     
-    @Binding public var isShown: Bool
+    @Environment(\.presentationMode) var presentationMode
+    
     @State public var isFirstLaunch: Bool
     @State public var appName: String
     @State public var feature1: WelcomeFeature
@@ -67,7 +68,7 @@ public struct WelcomeView: View {
             }
             Spacer()
             Button(action: {
-                self.isShown.toggle()
+                self.presentationMode.wrappedValue.dismiss()
                 NotificationCenter.default.post(name: WelcomeView.continueNotification, object: nil)
             }, label: {
                 Text("Continue")
@@ -82,8 +83,7 @@ public struct WelcomeView: View {
         .padding(.vertical, 64)
     }
     
-    public init(isShown: Binding<Bool>, isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature) {
-        self._isShown = isShown
+    public init(isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature) {
         self._isFirstLaunch = State(initialValue: isFirstLaunch)
         self._appName = State(initialValue: appName)
         self._feature1 = State(initialValue: feature1)
