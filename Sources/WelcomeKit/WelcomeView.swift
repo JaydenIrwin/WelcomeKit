@@ -25,49 +25,51 @@ public struct WelcomeView: View {
     @Environment(\.presentationMode) var presentationMode
     
     public var body: some View {
-        VStack(alignment: .leading, spacing: 28) {
+        VStack(spacing: 28) {
             Text(isFirstLaunch ? "Welcome to \(appName)" : "What's New in \(appName)")
-                .font(Font.system(size: isMacOS ? 46 : 36, weight: isMacOS ? .thin : .heavy, design: .default))
+                .font(Font.system(size: isMacOS ? 46 : 36, weight: isMacOS ? .thin : .bold, design: .default))
             #if os(macOS)
             Divider()
             #endif
-            HStack(spacing: 12) {
-                feature1.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 54, height: 54)
-                    .foregroundColor(.accentColor)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(feature1.title)
-                        .font(.headline)
-                    Text(feature1.body)
-                        .lineLimit(nil)
+            VStack(alignment: .leading, spacing: 28) {
+                HStack(spacing: 12) {
+                    feature1.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 54, height: 54)
+                        .foregroundColor(.accentColor)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(feature1.title)
+                            .font(.headline)
+                        Text(feature1.body)
+                            .lineLimit(nil)
+                    }
                 }
-            }
-            HStack(spacing: 12) {
-                feature2.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 54, height: 54)
-                    .foregroundColor(.accentColor)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(feature2.title)
-                        .font(.headline)
-                    Text(feature2.body)
-                        .lineLimit(nil)
+                HStack(spacing: 12) {
+                    feature2.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 54, height: 54)
+                        .foregroundColor(.accentColor)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(feature2.title)
+                            .font(.headline)
+                        Text(feature2.body)
+                            .lineLimit(nil)
+                    }
                 }
-            }
-            HStack(spacing: 12) {
-                feature3.image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 54, height: 54)
-                    .foregroundColor(.accentColor)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(feature3.title)
-                        .font(.headline)
-                    Text(feature3.body)
-                        .lineLimit(nil)
+                HStack(spacing: 12) {
+                    feature3.image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 54, height: 54)
+                        .foregroundColor(.accentColor)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(feature3.title)
+                            .font(.headline)
+                        Text(feature3.body)
+                            .lineLimit(nil)
+                    }
                 }
             }
             Spacer()
