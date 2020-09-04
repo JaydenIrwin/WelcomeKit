@@ -11,22 +11,33 @@ public struct WelcomeView: View {
     
     public static let continueNotification = Notification.Name("WelcomeKit.continue")
     
-    @Environment(\.presentationMode) var presentationMode
+    #if os(macOS)
+    let isMacOS = true
+    #else
+    let isMacOS = false
+    #endif
+    public let isFirstLaunch: Bool
+    public let appName: String
+    public let feature1: WelcomeFeature
+    public let feature2: WelcomeFeature
+    public let feature3: WelcomeFeature
     
-    @State public var isFirstLaunch: Bool
-    @State public var appName: String
-    @State public var feature1: WelcomeFeature
-    @State public var feature2: WelcomeFeature
-    @State public var feature3: WelcomeFeature
+    @Environment(\.presentationMode) var presentationMode
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 28) {
+            #if os(macOS)
+            Text(isFirstLaunch ? "Welcome to \(appName)" : "What's New in \(appName)")
+                .font(Font.system(size: 40, weight: .thin, design: .default))
+            Divider()
+            #else
             VStack(alignment: .leading) {
                 Text(isFirstLaunch ? "Welcome to" : "What's New")
                 Text(appName)
                     .foregroundColor(.accentColor)
             }
             .font(Font.system(size: 40, weight: .heavy, design: .default))
+            #endif
             HStack(spacing: 12) {
                 feature1.image
                     .resizable()
@@ -79,16 +90,16 @@ public struct WelcomeView: View {
                     .cornerRadius(8)
             })
         }
-        .frame(width: 300)
+        .frame(width: isMacOS ? 500 : 300)
         .padding(.vertical, 64)
     }
     
     public init(isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature) {
-        self._isFirstLaunch = State(initialValue: isFirstLaunch)
-        self._appName = State(initialValue: appName)
-        self._feature1 = State(initialValue: feature1)
-        self._feature2 = State(initialValue: feature2)
-        self._feature3 = State(initialValue: feature3)
+        self.isFirstLaunch = isFirstLaunch
+        self.appName = appName
+        self.feature1 = feature1
+        self.feature2 = feature2
+        self.feature3 = feature3
     }
 }
 
@@ -97,6 +108,6 @@ struct WelcomeView_Previews: PreviewProvider {
         let f1 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
         let f2 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
         let f3 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
-        return WelcomeView(isShown: .constant(true), isFirstLaunch: false, appName: "My App", feature1: f1, feature2: f2, feature3: f3)
+        return WelcomeView(isFirstLaunch: false, appName: "My App", feature1: f1, feature2: f2, feature3: f3)
     }
 }

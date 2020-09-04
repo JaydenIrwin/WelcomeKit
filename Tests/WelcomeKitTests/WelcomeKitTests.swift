@@ -1,5 +1,5 @@
 import XCTest
-@testable import Welcome
+@testable import WelcomeKit
 
 final class WelcomeTests: XCTestCase {
     func testExample() {
