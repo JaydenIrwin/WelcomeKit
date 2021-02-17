@@ -32,51 +32,14 @@ public struct WelcomeView: View {
             #if os(macOS)
             Divider()
             #endif
+            Spacer()
             VStack(alignment: .leading, spacing: 28) {
-                HStack(spacing: 12) {
-                    feature1.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 54, height: 54)
-                        .foregroundColor(.accentColor)
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(feature1.title)
-                            .font(.headline)
-                        Text(feature1.body)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true) // Fix for SwiftUI 1.0
-                    }
-                }
-                HStack(spacing: 12) {
-                    feature2.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 54, height: 54)
-                        .foregroundColor(.accentColor)
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(feature2.title)
-                            .font(.headline)
-                        Text(feature2.body)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true) // Fix for SwiftUI 1.0
-                    }
-                }
-                HStack(spacing: 12) {
-                    feature3.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 54, height: 54)
-                        .foregroundColor(.accentColor)
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(feature3.title)
-                            .font(.headline)
-                        Text(feature3.body)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true) // Fix for SwiftUI 1.0
-                    }
-                }
+                WelcomeFeatureView(feature: feature1)
+                WelcomeFeatureView(feature: feature2)
+                WelcomeFeatureView(feature: feature3)
             }
-            .frame(width: isMacOS ? 500 : 300)
+            .font(Font.system(size: 17))
+            .frame(idealWidth: isMacOS ? 500 : 400, maxWidth: isMacOS ? 500 : 400)
             Spacer()
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
@@ -84,14 +47,14 @@ public struct WelcomeView: View {
             }, label: {
                 Text("Continue")
                     .font(.headline)
-                    .frame(width: 300, height: 44)
+                    .frame(width: 300, height: 48)
                     .foregroundColor(.white)
                     .background(Color.accentColor)
-                    .cornerRadius(8)
+                    .cornerRadius(12)
             })
         }
-        .frame(width: isMacOS ? 500 : 300)
         .padding(.vertical, 64)
+        .padding(.horizontal, 32)
     }
     
     public init(isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature) {
