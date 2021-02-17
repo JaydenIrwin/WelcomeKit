@@ -47,7 +47,7 @@ public struct WelcomeView: View {
             }, label: {
                 Text("Continue")
                     .font(.headline)
-                    .frame(width: 300, height: 48)
+                    .frame(idealWidth: 340, maxWidth: 340, minHeight: 48, idealHeight: 48)
                     .foregroundColor(.white)
                     .background(Color.accentColor)
                     .cornerRadius(12)
