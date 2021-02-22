@@ -9,6 +9,12 @@ import SwiftUI
 
 struct WelcomeFeatureView: View {
     
+    #if targetEnvironment(macCatalyst)
+    let isCatalyst = true
+    #else
+    let isCatalyst = false
+    #endif
+    
     @State var feature: WelcomeFeature
     
     var body: some View {
@@ -22,6 +28,7 @@ struct WelcomeFeatureView: View {
                 Text(feature.title)
                     .font(.headline)
                 Text(feature.body)
+                    .font(Font.system(size: isCatalyst ? 13 : 17))
                     .foregroundColor(Color(UIColor.secondaryLabel))
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true) // Fix for SwiftUI 1.0

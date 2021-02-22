@@ -11,10 +11,10 @@ public struct WelcomeView: View {
     
     public static let continueNotification = Notification.Name("WelcomeKit.continue")
     
-    #if os(macOS)
-    let isMacOS = true
+    #if targetEnvironment(macCatalyst)
+    let isCatalyst = true
     #else
-    let isMacOS = false
+    let isCatalyst = false
     #endif
     public let isFirstLaunch: Bool
     public let appName: String
@@ -27,9 +27,9 @@ public struct WelcomeView: View {
     public var body: some View {
         VStack(spacing: 28) {
             Text(isFirstLaunch ? "Welcome to \(appName)" : "What's New in \(appName)")
-                .font(Font.system(size: isMacOS ? 46 : 36, weight: isMacOS ? .thin : .bold, design: .default))
+                .font(Font.system(size: 36, weight: .bold))
                 .multilineTextAlignment(.center)
-            #if os(macOS)
+            #if targetEnvironment(macCatalyst)
             Divider()
             #endif
             Spacer()
@@ -38,8 +38,7 @@ public struct WelcomeView: View {
                 WelcomeFeatureView(feature: feature2)
                 WelcomeFeatureView(feature: feature3)
             }
-            .font(Font.system(size: 17))
-            .frame(idealWidth: isMacOS ? 500 : 400, maxWidth: isMacOS ? 500 : 400)
+            .frame(idealWidth: isCatalyst ? 500 : 400, maxWidth: isCatalyst ? 500 : 400)
             Spacer()
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss()
