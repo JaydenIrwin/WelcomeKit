@@ -24,36 +24,48 @@ public struct WelcomeView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State var animationCompleted = false
+    
     public var body: some View {
-        VStack(spacing: 28) {
-            Text(isFirstLaunch ? "Welcome to \(appName)" : "What's New in \(appName)")
-                .font(Font.system(size: 36, weight: .bold))
-                .multilineTextAlignment(.center)
-            #if targetEnvironment(macCatalyst)
-            Divider()
-            #endif
-            Spacer()
-            VStack(alignment: .leading, spacing: 28) {
-                WelcomeFeatureView(feature: feature1)
-                WelcomeFeatureView(feature: feature2)
-                WelcomeFeatureView(feature: feature3)
+        GeometryReader { geometry in
+            VStack(spacing: 28) {
+                Text(isFirstLaunch ? "Welcome to \(appName)" : "What's New in \(appName)")
+                    .font(Font.system(size: 36, weight: .bold))
+                    .multilineTextAlignment(.center)
+                #if targetEnvironment(macCatalyst)
+                Divider()
+                #endif
+                Spacer()
+                VStack(alignment: .leading, spacing: animationCompleted ? 28 : 150) {
+                    WelcomeFeatureView(feature: feature1)
+                    WelcomeFeatureView(feature: feature2)
+                    WelcomeFeatureView(feature: feature3)
+                }
+                .frame(idealWidth: isCatalyst ? 500 : 400, maxWidth: isCatalyst ? 500 : 400)
+                Spacer()
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                    NotificationCenter.default.post(name: WelcomeView.continueNotification, object: nil)
+                }, label: {
+                    Text("Continue")
+                        .font(.headline)
+                        .frame(idealWidth: 340, maxWidth: 340, minHeight: 48, idealHeight: 48)
+                        .foregroundColor(.white)
+                        .background(Color.accentColor)
+                        .cornerRadius(12)
+                })
             }
-            .frame(idealWidth: isCatalyst ? 500 : 400, maxWidth: isCatalyst ? 500 : 400)
-            Spacer()
-            Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-                NotificationCenter.default.post(name: WelcomeView.continueNotification, object: nil)
-            }, label: {
-                Text("Continue")
-                    .font(.headline)
-                    .frame(idealWidth: 340, maxWidth: 340, minHeight: 48, idealHeight: 48)
-                    .foregroundColor(.white)
-                    .background(Color.accentColor)
-                    .cornerRadius(12)
-            })
+            .padding(.vertical, 64)
+            .padding(.horizontal, 32)
+            .frame(width: geometry.size.width, height: animationCompleted ? nil : geometry.size.height * 2)
+            .opacity(animationCompleted ? 1 : 0)
+            .offset(x: 0, y: animationCompleted ? 0 : 75)
         }
-        .padding(.vertical, 64)
-        .padding(.horizontal, 32)
+        .onAppear() {
+            withAnimation(Animation.easeOut(duration: 0.6)) {
+                animationCompleted = true
+            }
+        }
     }
     
     public init(isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature) {
