@@ -7,10 +7,13 @@
 
 import SwiftUI
 
-public struct WelcomeFeature {
+public struct WelcomeFeature: Identifiable {
     public var image: Image
     public var title: String
     public var body: String
+    public var id: String {
+        title
+    }
     
     public init(image: Image, title: String, body: String) {
         self.image = image

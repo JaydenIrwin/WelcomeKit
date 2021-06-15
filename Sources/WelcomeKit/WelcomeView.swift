@@ -18,9 +18,7 @@ public struct WelcomeView: View {
     #endif
     public let isFirstLaunch: Bool
     public let appName: String
-    public let feature1: WelcomeFeature
-    public let feature2: WelcomeFeature
-    public let feature3: WelcomeFeature
+    public let features: [WelcomeFeature]
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -37,9 +35,9 @@ public struct WelcomeView: View {
                 #endif
                 Spacer()
                 VStack(alignment: .leading, spacing: animationCompleted ? 28 : 150) {
-                    WelcomeFeatureView(feature: feature1)
-                    WelcomeFeatureView(feature: feature2)
-                    WelcomeFeatureView(feature: feature3)
+                    ForEach(features) { feature in
+                        WelcomeFeatureView(feature: feature)
+                    }
                 }
                 .frame(idealWidth: isCatalyst ? 500 : 400, maxWidth: isCatalyst ? 500 : 400)
                 Spacer()
@@ -68,12 +66,10 @@ public struct WelcomeView: View {
         }
     }
     
-    public init(isFirstLaunch: Bool, appName: String, feature1: WelcomeFeature, feature2: WelcomeFeature, feature3: WelcomeFeature) {
+    public init(isFirstLaunch: Bool, appName: String, features: [WelcomeFeature]) {
         self.isFirstLaunch = isFirstLaunch
         self.appName = appName.replacingOccurrences(of: " ", with: "\u{00a0}") // Use non-breaking spaces
-        self.feature1 = feature1
-        self.feature2 = feature2
-        self.feature3 = feature3
+        self.features = features
     }
 }
 
@@ -82,6 +78,6 @@ struct WelcomeView_Previews: PreviewProvider {
         let f1 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
         let f2 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
         let f3 = WelcomeFeature(image: Image(systemName: "app.fill"), title: "Title", body: "Body...")
-        return WelcomeView(isFirstLaunch: false, appName: "My App", feature1: f1, feature2: f2, feature3: f3)
+        return WelcomeView(isFirstLaunch: false, appName: "My App", features: [f1, f2, f3])
     }
 }
